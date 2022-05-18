@@ -49,4 +49,3 @@ jobs:
           message: 'Commit new version v: ${{ env.IMAGE_TAG }}'
           branch: 'main'
           tag: '${{ env.IMAGE_TAG }} --force'
-          tag_push: '--force'
