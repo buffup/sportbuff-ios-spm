@@ -1,0 +1,42 @@
+name: SPM
+
+on:
+  release:
+    types: [published]
+  repository_dispatch:
+
+env:
+  REPO: ${{ github.event.repository.name }}
+  SERVICE: sportbuff-ios-spm
+  ZIP_URL: ${{ github.event.client_payload.zip_url }}
+  ZIP_CHECKSUM: ${{ github.event.client_payload.checksum }}
+  TOKEN: ${{ secrets.GH_TOKEN }}
+
+concurrency:
+  group: merge
+  cancel-in-progress: false
+
+jobs:
+  spm:
+    name: Upload Swift Package
+    runs-on: macos-12
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Echo Variables
+        run: |
+          echo "ZIP_URL:"
+          echo ${{ env.ZIP_URL }}
+          echo "ZIP_CHECKSUM:"
+          echo ${{ env.ZIP_CHECKSUM }}
+
+      - name: Create Swift Package
+        run: |
+          export CHECKSUM="${{ env.ZIP_CHECKSUM }}"
+          export ZIP_URL="${{ env.ZIP_URL }}"
+          echo $CHECKSUM
+          echo $ZIP_URL
+          sed "s/URL/$ZIP_URL/g" Package.tpl | sed "s/CHECKSUM/$CHECKSUM/g" > Package.swift
+          cat Package.swift
