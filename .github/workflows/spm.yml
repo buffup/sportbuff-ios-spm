@@ -46,7 +46,6 @@ jobs:
         with:
           add: '-u .'
           default_author: 'github_actions'
-          message: 'Commit nnew version v: 0.0.3'
+          message: 'Commit new version v: 0.0.4'
           branch: 'main'
-          tag: 'v0.0.3 --force'
-          tag_push: '--force'
+          tag: 'v0.0.4 --force'
