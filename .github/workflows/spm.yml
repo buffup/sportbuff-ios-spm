@@ -8,7 +8,7 @@ on:
 env:
   REPO: ${{ github.event.repository.name }}
   SERVICE: sportbuff-ios-spm
-  ZIP_URL: ${{ github.event.client_payload.zip_url }}
+  IMAGE_TAG: ${{ github.event.client_payload.image_tag }}
   ZIP_CHECKSUM: ${{ github.event.client_payload.checksum }}
   TOKEN: ${{ secrets.GH_TOKEN }}
 
@@ -27,16 +27,16 @@ jobs:
 
       - name: Echo Variables
         run: |
-          echo "ZIP_URL:"
-          echo ${{ env.ZIP_URL }}
+          echo "IMAGE_TAG:"
+          echo ${{ env.IMAGE_TAG }}
           echo "ZIP_CHECKSUM:"
           echo ${{ env.ZIP_CHECKSUM }}
 
       - name: Create Swift Package
         run: |
           export CHECKSUM="${{ env.ZIP_CHECKSUM }}"
-          export ZIP_URL="${{ env.ZIP_URL }}"
+          export TAG="${{ env.IMAGE_TAG }}"
           echo $CHECKSUM
-          echo $ZIP_URL
-          sed "s/URL/$ZIP_URL/g" Package.tpl | sed "s/CHECKSUM/$CHECKSUM/g" > Package.swift
+          echo $TAG
+          sed "s/URL/https:\/\/buffup-public.s3.eu-west-2.amazonaws.com\/ios-sdk\/sportbuff-ios-sdk-$TAG.zip/g" Package.tpl | sed "s/CHECKSUM/$CHECKSUM/g" > Package.swift
           cat Package.swift
