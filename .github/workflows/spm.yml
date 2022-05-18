@@ -48,4 +48,4 @@ jobs:
           default_author: 'github_actions'
           message: 'Commit new version v: ${{ env.IMAGE_TAG }}'
           branch: 'main'
-          tag: 'v${{ env.IMAGE_TAG }} --force'
+          tag: '${{ env.IMAGE_TAG }} --force'
