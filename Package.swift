@@ -17,8 +17,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "SportBuff",
-            url: "https://buffup-public.s3.eu-west-2.amazonaws.com/ios-sdk/sportbuff-ios-sdk-3.0.11.zip",
-            checksum: "d32b175bd9c46bbf7b9a4dc99e2aa58860726c29af8f42f561fefbbb18184f38"
+            url: "https://buffup-public.s3.eu-west-2.amazonaws.com/ios-sdk/sportbuff-ios-sdk-3.0.12.zip",
+            checksum: "be94cf06208c3acd1412f88fd5f049e4737d5af90b5246229b7b8033e21766fd"
         )
     ]
 )
